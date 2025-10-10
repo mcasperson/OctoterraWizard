@@ -260,9 +260,9 @@ func getAccountCreds(ctx context.Context, db *sql.DB, masterKey string) (string,
 	var name string
 	var jsonValue string
 
-	timeout, cancel = context.WithTimeout(ctx, 60*time.Second)
+	timeout, cancel := context.WithTimeout(ctx, 60*time.Second)
 	defer cancel()
-	rows, err = db.QueryContext(timeout, "SELECT Name, JSON FROM Account")
+	rows, err := db.QueryContext(timeout, "SELECT Name, JSON FROM Account")
 	if err != nil {
 		return "", err
 	}
