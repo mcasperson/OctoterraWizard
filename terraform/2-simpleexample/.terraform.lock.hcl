@@ -1,7 +1,7 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/octopusdeploylabs/octopusdeploy" {
+provider "registry.terraform.io/OctopusDeploy/octopusdeploy" {
   version     = "0.40.4"
   constraints = "0.40.4"
   hashes = [
