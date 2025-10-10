@@ -525,6 +525,12 @@ func geFeedSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (s
 		// Each account type stores different secrets
 		password, passwordOk := result["Password"].(string)
 		secretKey, secretKeyOk := result["SecretKey"].(string)
+		name, nameOk := result["Name"].(string)
+
+		// Must have a name
+		if !nameOk {
+			continue
+		}
 
 		// Must have one sensitive value to extract
 		if !(passwordOk || secretKeyOk) {
@@ -534,10 +540,10 @@ func geFeedSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (s
 		var variableName string
 		var variableValue string
 		if passwordOk {
-			variableName = naming.FeedSecretName(fmt.Sprint(result["Name"]))
+			variableName = naming.FeedSecretName(fmt.Sprint(name))
 			variableValue, err = DecryptSensitiveVariable(masterKey, fmt.Sprint(password))
 		} else if secretKeyOk {
-			variableName = naming.FeedSecretKeyName(fmt.Sprint(result["Name"]))
+			variableName = naming.FeedSecretKeyName(fmt.Sprint(name))
 			variableValue, err = DecryptSensitiveVariable(masterKey, fmt.Sprint(secretKey))
 		}
 
