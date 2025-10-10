@@ -30,7 +30,7 @@ type StartSpaceExportStep struct {
 func (s StartSpaceExportStep) GetContainer(parent fyne.Window) *fyne.Container {
 
 	bottom, previous, next := s.BuildNavigation(func() {
-		s.Wizard.ShowWizardStep(ProjectExportStep{
+		s.Wizard.ShowWizardStep(CheckWorkerPoolStep{
 			Wizard:   s.Wizard,
 			BaseStep: BaseStep{State: s.State}})
 	}, func() {

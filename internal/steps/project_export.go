@@ -55,7 +55,7 @@ func (s ProjectExportStep) GetContainer(parent fyne.Window) *fyne.Container {
 				return
 			}
 
-			s.Wizard.ShowWizardStep(StartSpaceExportStep{
+			s.Wizard.ShowWizardStep(CheckWorkerPoolStep{
 				Wizard:   s.Wizard,
 				BaseStep: BaseStep{State: s.State}})
 		}
@@ -136,17 +136,19 @@ func (s ProjectExportStep) createNewProject(parent fyne.Window) {
 			},
 			// error
 			func(message string, err error) {
-				if err := logutil.WriteTextToFile("project_export_error.txt", err.Error()); err != nil {
-					fmt.Println("Failed to write error to file")
-				}
+				fyne.Do(func() {
+					if err := logutil.WriteTextToFile("project_export_error.txt", err.Error()); err != nil {
+						fmt.Println("Failed to write error to file")
+					}
 
-				s.result.SetText(message)
-				s.logs.SetText(err.Error())
-				s.logs.Show()
-				s.previous.Enable()
-				s.next.Disable()
-				s.infinite.Hide()
-				s.createProject.Enable()
+					s.result.SetText(message)
+					s.logs.SetText(err.Error())
+					s.logs.Show()
+					s.previous.Enable()
+					s.next.Disable()
+					s.infinite.Hide()
+					s.createProject.Enable()
+				})
 			})
 	}()
 }
