@@ -249,12 +249,20 @@ func getVariableSetSecrets(ctx context.Context, db *sql.DB, masterKey string) (s
 }
 
 func getAccountCreds(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "Account"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var name string
 	var jsonValue string
 
-	timeout, cancel := context.WithTimeout(ctx, 60*time.Second)
+	timeout, cancel = context.WithTimeout(ctx, 60*time.Second)
 	defer cancel()
-	rows, err := db.QueryContext(timeout, "SELECT Name, JSON FROM Account")
+	rows, err = db.QueryContext(timeout, "SELECT Name, JSON FROM Account")
 	if err != nil {
 		return "", err
 	}
@@ -332,6 +340,14 @@ func getAccountCreds(ctx context.Context, db *sql.DB, masterKey string) (string,
 }
 
 func getTenantVarSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "TenantVariable"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var id string
 	var jsonValue string
 
@@ -391,6 +407,14 @@ func getTenantVarSensitiveValues(ctx context.Context, db *sql.DB, masterKey stri
 }
 
 func getCertificateSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "Certificate"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var name string
 	var jsonValue string
 
@@ -464,6 +488,14 @@ func getCertificateSensitiveValues(ctx context.Context, db *sql.DB, masterKey st
 }
 
 func geFeedSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "Feed"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var name string
 	var jsonValue string
 
@@ -528,6 +560,14 @@ func geFeedSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (s
 }
 
 func getGitCredsSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "GitCredential"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var id string
 	var jsonValue string
 
@@ -598,6 +638,14 @@ func getGitCredsSensitiveValues(ctx context.Context, db *sql.DB, masterKey strin
 }
 
 func getStepTemplateSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "ActionTemplate"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var jsonValue string
 
 	timeout, cancel := context.WithTimeout(ctx, 60*time.Second)
@@ -702,6 +750,14 @@ func getStepTemplateSensitiveValues(ctx context.Context, db *sql.DB, masterKey s
 }
 
 func getStepsSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "DeploymentProcess"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var id string
 	var jsonValue string
 
@@ -823,6 +879,14 @@ func getStepsSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) 
 }
 
 func getTargetSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "Machine"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var name string
 	var jsonValue string
 
@@ -883,6 +947,14 @@ func getTargetSensitiveValues(ctx context.Context, db *sql.DB, masterKey string)
 }
 
 func getMachineProxyPassword(ctx context.Context, db *sql.DB, masterKey string) (string, error) {
+	if exists, err := CheckTableExists(ctx, db, "Proxy"); err == nil {
+		if !exists {
+			return "", nil
+		}
+	} else {
+		return "", err
+	}
+
 	var name string
 	var jsonValue string
 
