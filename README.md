@@ -14,7 +14,8 @@ View the docs [here](https://octopus.com/docs/administration/migrate-spaces-with
 
 The default values used by the wizard are defined in environment variables:
 
-* `OCTOTERRAWIZ_SOURCE_SERVER`: The URL of the Octopus server to export from
+* `OCTOTERRAWIZ_SOURCE_SERVER`: The URL of the Octopus server to export from in reference to the Octopus instance. When Octopus is running in a container, it will see itself on something like `http://localhost:8080`.
+* `OCTOTERRAWIZ_SOURCE_SERVER_EXTERNAL`: The URL of the Octopus server to export from in reference to the wizard. When Octopus is running in a container, the host will see it on something like `http://octopus:8083`. This will default to the `OCTOTERRAWIZ_SOURCE_SERVER` value if not set.
 * `OCTOTERRAWIZ_SOURCE_API_KEY`: The API key to use to connect to the source server
 * `OCTOTERRAWIZ_SOURCE_SPACE_ID`: The ID of the space to export
 * `OCTOTERRAWIZ_DESTINATION_SERVER`: The URL of the Octopus server to import to
