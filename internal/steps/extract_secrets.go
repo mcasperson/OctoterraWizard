@@ -198,11 +198,11 @@ func (s ExtractSecrets) getState() state.State {
 	return state.State{
 		BackendType:                   s.State.BackendType,
 		Server:                        s.State.Server,
-		ServerExternal:                "",
+		ServerExternal:                s.State.ServerExternal,
 		ApiKey:                        s.State.ApiKey,
 		Space:                         s.State.Space,
 		DestinationServer:             s.State.DestinationServer,
-		DestinationServerExternal:     "",
+		DestinationServerExternal:     s.State.DestinationServerExternal,
 		DestinationApiKey:             s.State.DestinationApiKey,
 		DestinationSpace:              s.State.DestinationSpace,
 		AwsAccessKey:                  s.State.AwsAccessKey,

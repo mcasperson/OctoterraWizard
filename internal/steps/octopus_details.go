@@ -124,11 +124,11 @@ func (s OctopusDetails) getState() state.State {
 	return state.State{
 		BackendType:               s.State.BackendType,
 		Server:                    strings.TrimSpace(s.server.Text),
-		ServerExternal:            "",
+		ServerExternal:            s.State.ServerExternal,
 		ApiKey:                    strings.TrimSpace(s.apiKey.Text),
 		Space:                     strings.TrimSpace(s.spaceId.Text),
 		DestinationServer:         s.State.DestinationServer,
-		DestinationServerExternal: "",
+		DestinationServerExternal: s.State.DestinationServerExternal,
 		DestinationApiKey:         s.State.DestinationApiKey,
 		DestinationSpace:          s.State.DestinationSpace,
 		AwsAccessKey:              s.State.AwsAccessKey,

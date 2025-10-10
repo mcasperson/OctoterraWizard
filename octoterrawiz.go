@@ -71,7 +71,7 @@ func main() {
 		BaseStep: steps.BaseStep{State: state.State{
 			BackendType:                   os.Getenv("OCTOTERRAWIZ_BACKEND_TYPE"),
 			Server:                        defaultSourceServer,
-			ServerExternal:                "",
+			ServerExternal:                os.Getenv("OCTOTERRAWIZ_SOURCE_SERVER_EXTERNAL"),
 			ApiKey:                        defaultSourceServerApi,
 			Space:                         defaultSourceServerSpace,
 			DestinationServer:             defaultDestinationServer,
