@@ -99,6 +99,7 @@ func (s StartProjectExportStep) GetContainer(parent fyne.Window) *fyne.Container
 	infinite.Start()
 	s.exportProjects = widget.NewButton("Export Projects", func() {
 		s.exportProjects.Disable()
+		s.environments.Disable()
 		next.Disable()
 		previous.Disable()
 		infinite.Show()
@@ -117,6 +118,7 @@ func (s StartProjectExportStep) GetContainer(parent fyne.Window) *fyne.Container
 				func() {
 					fyne.Do(func() {
 						s.exportProjects.Enable()
+						s.environments.Enable()
 						previous.Enable()
 						next.Enable()
 						infinite.Hide()

@@ -96,6 +96,7 @@ func (s StartSpaceExportStep) GetContainer(parent fyne.Window) *fyne.Container {
 	s.exportSpace = widget.NewButton("Export Space", func() {
 		s.exportDone = true
 		s.exportSpace.Disable()
+		s.environments.Disable()
 		previous.Disable()
 		next.Disable()
 		infinite.Show()
@@ -118,6 +119,7 @@ func (s StartSpaceExportStep) GetContainer(parent fyne.Window) *fyne.Container {
 						s.logs.Hide()
 						infinite.Hide()
 						s.exportSpace.Enable()
+						s.environments.Enable()
 					})
 				},
 				func() {
