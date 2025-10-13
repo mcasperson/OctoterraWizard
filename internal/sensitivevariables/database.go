@@ -6,11 +6,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mcasperson/OctoterraWizard/internal/naming"
 	"log"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/mcasperson/OctoterraWizard/internal/naming"
 )
 import _ "github.com/microsoft/go-mssqldb"
 
@@ -777,6 +779,8 @@ func getStepsSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) 
 		}
 	}()
 
+	processedSteps := []string{}
+
 	var builder strings.Builder
 
 	for rows.Next() {
@@ -859,6 +863,13 @@ func getStepsSensitiveValues(ctx context.Context, db *sql.DB, masterKey string) 
 					if !actionIdOk {
 						continue
 					}
+
+					if slices.Index(processedSteps, actionId) != -1 {
+						// Already processed this step action, so skip it
+						continue
+					}
+
+					processedSteps = append(processedSteps, actionId)
 
 					// We can now decrypt the sensitive value
 					variableName := naming.StepPropertySecretName(id, actionId, propertyName)
